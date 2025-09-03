@@ -1,0 +1,9 @@
+[
+    {
+        "Protocol": "TCP",
+        "Port": "8096",
+        "Name": "HTTP",
+        "Description": "Port used for main game traffic",
+        "Ref": "HTTP"
+    }
+]
