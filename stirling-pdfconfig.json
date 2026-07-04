@@ -1,0 +1,151 @@
+[
+    {
+        "DisplayName": "Enable Login / Authentication",
+        "Category": "Stirling-PDF:file-pdf",
+        "Subcategory": "Authentication:lock:2",
+        "Description": "If enabled, users must log in before using Stirling-PDF (maps to the SECURITY_ENABLELOGIN environment variable). Set an initial username and password below for the first admin account. Leave disabled for open access on a trusted home network.",
+        "Keywords": "login,auth,authentication,security,enableLogin",
+        "FieldName": "EnableLogin",
+        "InputType": "checkbox",
+        "ParamFieldName": "EnableLogin",
+        "DefaultValue": "false",
+        "EnumValues": {
+            "False": "false",
+            "True": "true"
+        }
+    },
+    {
+        "DisplayName": "Initial Admin Username",
+        "Category": "Stirling-PDF:file-pdf",
+        "Subcategory": "Authentication:lock:2",
+        "Description": "Username for the first admin account, created on first start when login is enabled (maps to SECURITY_INITIALLOGIN_USERNAME). Only used the very first time the database is created.",
+        "Keywords": "username,admin,login,initialLogin",
+        "FieldName": "InitialUsername",
+        "InputType": "text",
+        "ParamFieldName": "InitialUsername",
+        "DefaultValue": "admin",
+        "Placeholder": "admin",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Initial Admin Password",
+        "Category": "Stirling-PDF:file-pdf",
+        "Subcategory": "Authentication:lock:2",
+        "Description": "Password for the first admin account, created on first start when login is enabled (maps to SECURITY_INITIALLOGIN_PASSWORD). Change it after the first login. Only used the very first time the database is created.",
+        "Keywords": "password,admin,login,initialLogin",
+        "FieldName": "InitialPassword",
+        "InputType": "password",
+        "ParamFieldName": "InitialPassword",
+        "DefaultValue": "",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Application Name",
+        "Category": "Stirling-PDF:file-pdf",
+        "Subcategory": "General:sliders:1",
+        "Description": "The name shown in the browser tab and navigation bar (maps to UI_APPNAME).",
+        "Keywords": "name,title,appName,ui",
+        "FieldName": "AppName",
+        "InputType": "text",
+        "ParamFieldName": "AppName",
+        "DefaultValue": "Stirling-PDF",
+        "Placeholder": "Stirling-PDF",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Default Language",
+        "Category": "Stirling-PDF:file-pdf",
+        "Subcategory": "General:sliders:1",
+        "Description": "Force a default UI language for new users, e.g. en-US, en-GB, de-DE, fr-FR (maps to SYSTEM_DEFAULTLOCALE). Leave empty to auto-detect from the browser.",
+        "Keywords": "language,locale,defaultLocale,i18n",
+        "FieldName": "DefaultLocale",
+        "InputType": "text",
+        "ParamFieldName": "DefaultLocale",
+        "DefaultValue": "",
+        "Placeholder": "en-US",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Show Update Notifications",
+        "Category": "Stirling-PDF:file-pdf",
+        "Subcategory": "General:sliders:1",
+        "Description": "Show a notice in the UI when a new Stirling-PDF release is available (maps to SYSTEM_SHOWUPDATE).",
+        "Keywords": "update,notification,showUpdate",
+        "FieldName": "ShowUpdate",
+        "InputType": "checkbox",
+        "ParamFieldName": "ShowUpdate",
+        "DefaultValue": "true",
+        "EnumValues": {
+            "False": "false",
+            "True": "true"
+        }
+    },
+    {
+        "DisplayName": "Enable Analytics",
+        "Category": "Stirling-PDF:file-pdf",
+        "Subcategory": "General:sliders:1",
+        "Description": "Allow Stirling-PDF to collect anonymous usage analytics (maps to SYSTEM_ENABLEANALYTICS). Disabled by default for privacy.",
+        "Keywords": "analytics,telemetry,privacy,enableAnalytics",
+        "FieldName": "EnableAnalytics",
+        "InputType": "checkbox",
+        "ParamFieldName": "EnableAnalytics",
+        "DefaultValue": "false",
+        "EnumValues": {
+            "False": "false",
+            "True": "true"
+        }
+    },
+    {
+        "DisplayName": "Maximum Memory",
+        "Category": "Java:coffee",
+        "Subcategory": "Runtime:microchip:1",
+        "Description": "Maximum heap memory for the Java process (passed as -Xmx). Increase for large PDFs or OCR workloads.",
+        "Keywords": "memory,ram,heap,xmx,java",
+        "FieldName": "MaxMemory",
+        "InputType": "number",
+        "ParamFieldName": "MaxMemory",
+        "MinValue": "256",
+        "DefaultValue": "2048",
+        "Suffix": "MB",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Additional JVM Arguments",
+        "Category": "Java:coffee",
+        "Subcategory": "Runtime:microchip:1",
+        "Description": "Extra arguments passed to the Java Virtual Machine before -jar, e.g. -XX:+UseZGC. Leave empty unless you know you need them.",
+        "Keywords": "java,jvm,args,arguments,flags",
+        "FieldName": "CustomJavaArgs",
+        "InputType": "text",
+        "ParamFieldName": "CustomJavaArgs",
+        "DefaultValue": "",
+        "Placeholder": "-XX:+UseZGC",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Stirling-PDF Version",
+        "Category": "Updates",
+        "Subcategory": "Server Updates:build:-1",
+        "Description": "The Stirling-PDF release tag to install from GitHub, e.g. v2.14.0 (see https://github.com/Stirling-Tools/Stirling-PDF/releases). Leave empty to always install the latest release.",
+        "Keywords": "version,release,tag,update",
+        "FieldName": "ServerVersion",
+        "InputType": "text",
+        "ParamFieldName": "ServerVersion",
+        "DefaultValue": "",
+        "Placeholder": "v2.14.0",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Java Runtime Version",
+        "Category": "Updates",
+        "Subcategory": "Server Updates:build:-1",
+        "Description": "The Eclipse Temurin (OpenJDK) major version to download and run Stirling-PDF with. Stirling-PDF 2.14+ requires Java 25. Only change this if you pin an older Stirling-PDF version that needs an older Java.",
+        "Keywords": "java,jre,jdk,temurin,version",
+        "FieldName": "JavaRuntimeVersion",
+        "InputType": "number",
+        "ParamFieldName": "JavaRuntimeVersion",
+        "MinValue": "17",
+        "DefaultValue": "25",
+        "EnumValues": {}
+    }
+]

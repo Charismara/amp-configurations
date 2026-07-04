@@ -1,0 +1,9 @@
+[
+    {
+        "Protocol": "TCP",
+        "Port": 8080,
+        "Ref": "ServerPort",
+        "Name": "Web UI Port",
+        "Description": "Port for the Stirling-PDF web interface (HTTP)"
+    }
+]

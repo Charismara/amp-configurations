@@ -1,0 +1,30 @@
+[
+    {
+        "UpdateStageName": "Stirling-PDF Download",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "GithubRelease",
+        "UpdateSourceArgs": "Stirling-Tools/Stirling-PDF",
+        "UpdateSourceData": "Stirling-PDF-with-login.jar",
+        "UpdateSourceVersion": "{{ServerVersion}}",
+        "OverwriteExistingFiles": true,
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Java Runtime (x86_64)",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSourceArch": "x86_64",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"cd stirling-pdf || exit 1; JAVA_VER=\\\"{{JavaRuntimeVersion}}\\\"; [ -z \\\"$JAVA_VER\\\" ] && JAVA_VER=25; if [ -x jre/bin/java ] && [ \\\"$(cat jre/.javaver 2>/dev/null)\\\" = \\\"$JAVA_VER\\\" ]; then echo \\\"JRE $JAVA_VER already installed, skipping\\\"; else echo \\\"Downloading Temurin JRE $JAVA_VER (x64)...\\\"; wget -qO jre.tar.gz \\\"https://api.adoptium.net/v3/binary/latest/$JAVA_VER/ga/linux/x64/jre/hotspot/normal/eclipse\\\" || { echo \\\"JRE download failed\\\"; exit 1; }; rm -rf jre; mkdir -p jre; tar -xzf jre.tar.gz -C jre --strip-components=1 || { echo \\\"JRE extract failed\\\"; exit 1; }; rm -f jre.tar.gz; chmod +x jre/bin/java; echo \\\"$JAVA_VER\\\" > jre/.javaver; echo \\\"JRE $JAVA_VER ready\\\"; fi\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Java Runtime (aarch64)",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSourceArch": "aarch64",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"cd stirling-pdf || exit 1; JAVA_VER=\\\"{{JavaRuntimeVersion}}\\\"; [ -z \\\"$JAVA_VER\\\" ] && JAVA_VER=25; if [ -x jre/bin/java ] && [ \\\"$(cat jre/.javaver 2>/dev/null)\\\" = \\\"$JAVA_VER\\\" ]; then echo \\\"JRE $JAVA_VER already installed, skipping\\\"; else echo \\\"Downloading Temurin JRE $JAVA_VER (aarch64)...\\\"; wget -qO jre.tar.gz \\\"https://api.adoptium.net/v3/binary/latest/$JAVA_VER/ga/linux/aarch64/jre/hotspot/normal/eclipse\\\" || { echo \\\"JRE download failed\\\"; exit 1; }; rm -rf jre; mkdir -p jre; tar -xzf jre.tar.gz -C jre --strip-components=1 || { echo \\\"JRE extract failed\\\"; exit 1; }; rm -f jre.tar.gz; chmod +x jre/bin/java; echo \\\"$JAVA_VER\\\" > jre/.javaver; echo \\\"JRE $JAVA_VER ready\\\"; fi\"",
+        "SkipOnFailure": false
+    }
+]
