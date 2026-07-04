@@ -3,3 +3,5 @@
 # (paths, regexes, JSON) when the repo is fetched by AMP.
 *.kvp text eol=lf
 *.json text eol=lf
+*.sh text eol=lf
+Dockerfile text eol=lf
