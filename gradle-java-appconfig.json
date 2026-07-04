@@ -1,0 +1,83 @@
+[
+    {
+        "DisplayName": "Jar File",
+        "Category": "Application:rocket",
+        "Subcategory": "Startup:play:1",
+        "Description": "Path to the .jar file to launch, relative to the instance directory (e.g. server.jar or build/libs/app.jar). Upload it via the File Manager, or build it from source inside the container with the bundled Gradle/git.",
+        "Keywords": "jar,application,main,executable,file",
+        "FieldName": "JarFile",
+        "InputType": "text",
+        "ParamFieldName": "JarFile",
+        "DefaultValue": "app.jar",
+        "Placeholder": "app.jar",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Program Arguments",
+        "Category": "Application:rocket",
+        "Subcategory": "Startup:play:1",
+        "Description": "Arguments passed to your application after -jar, e.g. --config config.yml nogui. Leave empty if not needed.",
+        "Keywords": "args,arguments,program,parameters,options",
+        "FieldName": "ProgramArgs",
+        "InputType": "text",
+        "ParamFieldName": "ProgramArgs",
+        "DefaultValue": "",
+        "Placeholder": "--config config.yml",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Java Runtime Version",
+        "Category": "Java:coffee",
+        "Subcategory": "Runtime:microchip:1",
+        "Description": "Which bundled JDK runs your jar. Both 21 and 22 are available in the container; JDK 8 is also present as JAVA_8_HOME for Gradle toolchains.",
+        "Keywords": "java,jdk,jvm,version,runtime",
+        "FieldName": "JavaVersion",
+        "InputType": "enum",
+        "ParamFieldName": "JavaVersion",
+        "DefaultValue": "21",
+        "EnumValues": {
+            "21": "Java 21",
+            "22": "Java 22"
+        }
+    },
+    {
+        "DisplayName": "Maximum Memory",
+        "Category": "Java:coffee",
+        "Subcategory": "Runtime:microchip:1",
+        "Description": "Maximum JVM heap memory, passed as -Xmx. Increase for memory-hungry applications.",
+        "Keywords": "memory,ram,heap,xmx,java",
+        "FieldName": "MaxMemory",
+        "InputType": "number",
+        "ParamFieldName": "MaxMemory",
+        "MinValue": "128",
+        "DefaultValue": "2048",
+        "Suffix": "MB",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Additional JVM Arguments",
+        "Category": "Java:coffee",
+        "Subcategory": "Runtime:microchip:1",
+        "Description": "Extra arguments passed to the Java Virtual Machine before -jar, e.g. -XX:+UseZGC -Dfile.encoding=UTF-8. Leave empty unless you know you need them.",
+        "Keywords": "java,jvm,args,arguments,flags",
+        "FieldName": "CustomJavaArgs",
+        "InputType": "text",
+        "ParamFieldName": "CustomJavaArgs",
+        "DefaultValue": "",
+        "Placeholder": "-XX:+UseZGC",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "Environment Variables File",
+        "Category": "Environment:leaf",
+        "Subcategory": "Variables:list:1",
+        "Description": "Filename (in the instance directory) holding extra environment variables for your application - one NAME=VALUE per line, unlimited entries, names used exactly as written (no prefixes). Edit it in the File Manager; a commented example is created automatically on first start. Leave as 'environment' unless you prefer another name such as .env.",
+        "Keywords": "environment,variables,env,file,custom",
+        "FieldName": "EnvFile",
+        "InputType": "text",
+        "ParamFieldName": "EnvFile",
+        "DefaultValue": "environment",
+        "Placeholder": "environment",
+        "EnumValues": {}
+    }
+]

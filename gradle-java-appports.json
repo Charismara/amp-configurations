@@ -1,0 +1,9 @@
+[
+    {
+        "Protocol": "TCP",
+        "Port": 8080,
+        "Ref": "ApplicationPort",
+        "Name": "Application Port",
+        "Description": "Primary TCP port your application should listen on. It is passed to the app as the SERVER_PORT and PORT environment variables."
+    }
+]
