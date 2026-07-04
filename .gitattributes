@@ -1,0 +1,5 @@
+# CubeCoders AMP generic module templates are parsed line-by-line and must
+# always use LF line endings, otherwise a trailing CR can corrupt values
+# (paths, regexes, JSON) when the repo is fetched by AMP.
+*.kvp text eol=lf
+*.json text eol=lf
