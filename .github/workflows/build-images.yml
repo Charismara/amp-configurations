@@ -36,6 +36,8 @@ jobs:
           # Add further images here as more templates are created.
           - name: stirling-pdf-ampbase
             context: docker/stirling-pdf
+          - name: gradle-java-app-ampbase
+            context: docker/gradle-java-app
     steps:
       - name: Checkout
         uses: actions/checkout@v4
