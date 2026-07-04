@@ -10,11 +10,15 @@
 # apt install). Java itself is still provided by the template's JRE download
 # stage, so this image only needs the PDF/OCR/Office toolchain.
 #
-# Build (run this on the machine whose Docker your AMP instances use):
-#   docker build -t charismara/stirling-pdf-ampbase:latest docker/stirling-pdf/
+# This image is built and pushed automatically by
+# .github/workflows/build-images.yml to
+#   ghcr.io/charismara/stirling-pdf-ampbase   (tags: latest + <yyyy>-<mm>-<dd>.<build>)
 #
-# Then reference it from stirling-pdf.kvp:
-#   Meta.SpecificDockerImage=charismara/stirling-pdf-ampbase:latest
+# To build it manually instead (e.g. directly on the AMP host):
+#   docker build -t ghcr.io/charismara/stirling-pdf-ampbase:latest docker/stirling-pdf/
+#
+# The template references it via:
+#   Meta.SpecificDockerImage=ghcr.io/charismara/stirling-pdf-ampbase:latest
 FROM cubecoders/ampbase:debian
 
 ENV DEBIAN_FRONTEND=noninteractive \

@@ -1,0 +1,82 @@
+name: Build & Push Docker Images
+
+# Builds the custom AMP base images used by the templates in this repo and
+# pushes them to the GitHub Container Registry (ghcr.io). Each run publishes:
+#   * :latest
+#   * :<yyyy>-<mm>-<dd>.<build-number>   (e.g. 2026-07-04.42)
+# where <build-number> is the incrementing GitHub Actions run number.
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'docker/**'
+      - '.github/workflows/build-images.yml'
+  workflow_dispatch:
+  schedule:
+    # Weekly rebuild (Mondays 04:00 UTC) so the images pick up base-image and
+    # OS security updates even when the Dockerfiles themselves don't change.
+    - cron: '0 4 * * 1'
+
+concurrency:
+  group: build-images-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Add further images here as more templates are created.
+          - name: stirling-pdf-ampbase
+            context: docker/stirling-pdf
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compute image name and version tag
+        id: meta
+        run: |
+          owner_lc="${GITHUB_REPOSITORY_OWNER,,}"
+          image="ghcr.io/${owner_lc}/${{ matrix.name }}"
+          version="$(date -u +'%Y-%m-%d').${{ github.run_number }}"
+          echo "image=${image}" >> "$GITHUB_OUTPUT"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "Building ${image}:${version}"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.context }}
+          platforms: linux/amd64,linux/arm64
+          push: true
+          provenance: false
+          tags: |
+            ${{ steps.meta.outputs.image }}:latest
+            ${{ steps.meta.outputs.image }}:${{ steps.meta.outputs.version }}
+          labels: |
+            org.opencontainers.image.title=${{ matrix.name }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ steps.meta.outputs.version }}
+          cache-from: type=gha,scope=${{ matrix.name }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.name }}
