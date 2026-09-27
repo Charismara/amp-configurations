@@ -69,9 +69,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # LibreOffice UNO server (unoserver) for Office <-> PDF conversions. Installed in
 # its own venv with --system-site-packages so it can use the distro python3-uno.
-# Pinned to 3.6 to match the unoconvert client version Stirling-PDF expects.
+# Pinned to 3.7 to match the unoconvert client version Stirling-PDF 3.0.x expects.
 RUN python3 -m venv /opt/unoserver-venv --system-site-packages \
-    && /opt/unoserver-venv/bin/pip install --no-cache-dir "unoserver==3.6" \
+    && /opt/unoserver-venv/bin/pip install --no-cache-dir "unoserver==3.7" \
     && ln -sf /opt/unoserver-venv/bin/unoserver  /usr/local/bin/unoserver \
     && ln -sf /opt/unoserver-venv/bin/unoconvert /usr/local/bin/unoconvert \
     && ln -sf /opt/unoserver-venv/bin/unoping    /usr/local/bin/unoping
